@@ -1,0 +1,12 @@
+bd/
+datasets/
+datasets_compilados/
+*.csv
+scripts/wpp/final.py
+scripts/wpp/intermedio.py  
+scripts/wpp/intermedio_ro.py
+scripts/wpp/chrimedriver.exe
+scripts/cw/trans.py
+scripts/cw/procesar_csv.py
+*.ipynb
+scripts/wpp/chrimedriver.exe
