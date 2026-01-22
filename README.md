@@ -97,10 +97,13 @@ python b04_cw.py
 ```bash
 cd scripts/wpp
 
-# Extraer mensajes
+# Opción A: Scraper básico (más chats, más tiempo)
+python b01_s.py
+
+# Opción B: Scraper optimizado (menos chats, más rápido, recupera datos con timeout)
 python b02_omar.py
 
-# Procesar datos
+# Procesar datos extraídos
 python b03_p.py
 ```
 
@@ -117,14 +120,17 @@ python b05.py
 ```mermaid
 graph TD
     A[Chatwoot CSVs] --> B[b04_cw.py]
-    C[WhatsApp Web] --> D[b02_omar.py]
-    D --> E[b03_p.py]
-    B --> F[files/output/]
-    E --> F
-    F --> G[b05.py]
-    H[Histórico] --> G
-    G --> I[nuevo_csv.csv]
-    I --> J[Análisis y Reportes]
+    C[WhatsApp Web] --> D{Opción de Scraper}
+    D -->|b01_s.py<br/>Básico| E[200 chats<br/>40s timeout<br/>No guarda con timeout]
+    D -->|b02_omar.py<br/>Optimizado| F[5 chats<br/>20s timeout<br/>Sí guarda con timeout]
+    E --> G[b03_p.py]
+    F --> G
+    B --> H[files/output/]
+    G --> H
+    H --> I[b05.py]
+    J[Histórico] --> I
+    I --> K[nuevo_csv.csv]
+    K --> L[Análisis y Reportes]
 ```
 
 ## 📋 Scripts Disponibles
@@ -136,9 +142,23 @@ graph TD
   - Generación de CSVs por agente
 
 ### WhatsApp (scripts/wpp/)
-- **b01_s.py**: Scraper básico (200 chats, 40s timeout)
-- **b02_omar.py**: Scraper optimizado (5 chats, 20s timeout)
+- **b01_s.py**: Scraper básico de WhatsApp Web
+  - 200 chats no-grupo
+  - 40 segundos timeout por chat
+  - No guarda datos si hay timeout
+  - Incluye logs de depuración
+
+- **b02_omar.py**: Scraper optimizado de WhatsApp Web
+  - 5 chats no-grupo (más conservador)
+  - 20 segundos timeout por chat
+  - Sí guarda datos incluso con timeout
+  - Reporte de chats con problemas
+
 - **b03_p.py**: Procesador de datos de WhatsApp
+  - Parseo inteligente de fechas (D/M vs M/D)
+  - Normalización de espacios y caracteres
+  - Conversión a formato 24 horas
+  - Detección de mensajes entrantes/salientes
 
 ### Procesamiento Principal (processing/)
 - **b05.py**: Consolidador y analizador principal
