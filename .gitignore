@@ -1,6 +1,4 @@
 bd/
-datasets/
-datasets_compilados/
 *.csv
 scripts/wpp/final.py
 scripts/wpp/intermedio.py  
