@@ -1,0 +1,66 @@
+# ===============================
+# REQUERIMIENTOS PARA PROYECTO VENTAS
+# ===============================
+
+# Core Data Processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Web Scraping & Automation
+selenium>=4.15.0
+webdriver-manager>=4.0.0
+
+# Date & Time Processing
+python-dateutil>=2.8.0
+
+# File Path Handling
+pathlib2>=2.3.7
+
+# Regular Expressions
+re>=2.2.1
+
+# Text Processing & Unicode
+unicodedata2>=0.3.8
+
+# Type Hints (Python 3.8+)
+typing-extensions>=4.5.0
+
+# ===============================
+# DESCRIPCIÓN DE PAQUETES POR USO
+# ===============================
+
+# PANDAS - Procesamiento de datos CSV
+# Usado en: scripts/cw/, scripts/wpp/, processing/
+# Funciones: leer CSV, manipular DataFrames, exportar resultados
+
+# NUMPY - Cálculos numéricos y arrays
+# Usado en: processing/b05.py
+# Funciones: operaciones matemáticas, manejo de fechas
+
+# SELENIUM - Automatización de navegador web
+# Usado en: scripts/wpp/b01_s.py, scripts/wpp/b02_omar.py
+# Funciones: scraping de WhatsApp Web, extracción de mensajes
+
+# WEBDRIVER-MANAGER - Gestión automática de drivers
+# Usado en: scripts/wpp/b01_s.py, scripts/wpp/b02_omar.py
+# Funciones: descarga automática de ChromeDriver
+
+# PYTHON-DATEUTIL - Manejo avanzado de fechas
+# Usado en: processing/b05.py
+# Funciones: parsing de fechas, cálculos con timedelta
+
+# UNICODATA2 - Normalización de texto con acentos
+# Usado en: processing/b05.py
+# Funciones: remover acentos, normalizar caracteres especiales
+
+# TYPING-EXTENSIONS - Type hints modernos
+# Usado en: processing/b05.py
+# Funciones: soporte para anotaciones de tipo
+
+# ===============================
+# INSTALACIÓN
+# ===============================
+# pip install -r requirements.txt
+
+# O instalar individualmente:
+# pip install pandas numpy selenium webdriver-manager python-dateutil unicodedata2 typing-extensions
