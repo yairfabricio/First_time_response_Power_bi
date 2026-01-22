@@ -7,3 +7,4 @@ scripts/wpp/chromedriver.exe
 scripts/cw/trans.py
 scripts/cw/procesar_csv.py
 *.ipynb
+*pbix
