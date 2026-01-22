@@ -152,9 +152,7 @@ ValueError: time data 'hoy' does not match format '%Y-%m-%d'
 
 ### Para b05.py
 - 🔄 Agregar más formatos de fecha soportados
-- 📊 Generar reportes de procesamiento
 - 🔍 Agregar validación de datos de entrada
-- 📋 Crear logs detallados del proceso
 - 🎯 Soporte para múltiples carpetas de entrada
 
 ---

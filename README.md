@@ -1,10 +1,10 @@
-# 🏢 Sistema de Procesamiento de Ventas
+# 🏢 First Time Response Analysis / Analisis de Tiempo de Respuesta
 
 Sistema completo para la extracción, procesamiento y análisis de datos de conversaciones de ventas desde múltiples fuentes (Chatwoot, WhatsApp Web).
 
 ## 📋 Resumen del Proyecto
 
-Este proyecto automatiza el flujo completo de datos de ventas desde la extracción hasta el análisis final, permitiendo consolidar información de diferentes plataformas y generar reportes por ejecutivo.
+Este proyecto muestra el flujo completo de datos de ventas desde la extracción hasta el análisis final, permitiendo consolidar información de diferentes plataformas y generar reportes por ejecutivo.
 
 ## 🗂️ Estructura del Proyecto
 
@@ -26,7 +26,6 @@ ventas/
 │   ├── 📁 input/        # Datos de entrada
 │   │   ├── 📁 cw/       # CSVs de Chatwoot
 │   │   ├── 📁 wpp/      # CSVs de WhatsApp
-│   │   └── nuevo_csv.csv # Histórico consolidado
 │   ├── 📁 output/       # Datos procesados
 │   └── 📁 intermediate/ # Datos intermedios
 ├── requirements.txt      # Dependencias del proyecto
