@@ -15,7 +15,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
 
 #TIME_LIMIT_SECONDS = 5 * 60  # 5 minutos
-MAX_NON_GROUP_CHAT=200
+MAX_NON_GROUP_CHAT = 250  # Valor por defecto, se puede modificar en ejecución
 CHAT_TIME_LIMIT_SECONDS = 40  #  por chat
 
 EXCLUDE_TITLES = {
@@ -448,6 +448,18 @@ def main():
     driver = setup_driver(profile)
     driver.get("https://web.whatsapp.com/")
     wait_for_whatsapp_login(driver)
+
+    # Pedir configuración al usuario
+    try:
+        max_chats_input = input("¿Cuántos chats no-grupo procesar? (por defecto 250): ").strip()
+        if max_chats_input and max_chats_input.isdigit():
+            global MAX_NON_GROUP_CHAT
+            MAX_NON_GROUP_CHAT = int(max_chats_input)
+            print(f"✅ Se procesarán hasta {MAX_NON_GROUP_CHAT} chats no-grupo")
+        else:
+            print(f"✅ Usando valor por defecto: {MAX_NON_GROUP_CHAT} chats no-grupo")
+    except ValueError:
+        print(f"❌ Valor inválido. Usando valor por defecto: {MAX_NON_GROUP_CHAT}")
 
     output_name = input("Nombre del archivo CSV (sin .csv): ").strip()
     safe_name = "".join(c for c in output_name if c.isalnum() or c in (" ", "_", "-")).strip().replace(" ", "-")
