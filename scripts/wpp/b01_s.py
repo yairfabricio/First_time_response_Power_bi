@@ -53,7 +53,26 @@ EXCLUDE_TITLES = {
     "Estrella grupo",
     "Peru",
     "+51 913 579 325",
-    "Michel Tla"
+    "Michel Tla",
+    "Milusca Operaciones Cusco",
+    "Juan Corporativo",
+    "Debora Hotel Tla Empresa",
+    "Arielys X4 Septiembre",
+    "Renato Ventas",
+    "Rosmery Quispe Corporativo",
+    "+51 978 877 833",
+    "Adriel Trenes",
+    "Vanessa X6 Mayo",
+    "Ascencio Monarga TLA Personal",
+    "Daniel Tla Inca",
+    "Karina Vuelos TLA",
+    "Sra Juanita Personal",
+    "Rodrigo Empresa",
+    "José Daniel Montero X2 Febrero",
+    "Loren Marie Puerto x1",
+    "Omar Mex",
+    "Rosmery Cuba TLA",
+    "Angela Número",
 }
 META_BANNED_CHARS = {"*", "#", "•"} 
 
