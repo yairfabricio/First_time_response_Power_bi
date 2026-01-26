@@ -2,6 +2,7 @@ import csv
 import time
 import os
 import re
+import keyboard  # Para detectar teclas
 from pathlib import Path
 from datetime import datetime, timedelta
 
@@ -461,6 +462,9 @@ def main():
     except ValueError:
         print(f"❌ Valor inválido. Usando valor por defecto: {MAX_NON_GROUP_CHAT}")
 
+    print("\n🛑 Para detener el scraping en cualquier momento, presiona la tecla 'q'")
+    print("🔄 Iniciando scraping...")
+    
     output_name = input("Nombre del archivo CSV (sin .csv): ").strip()
     safe_name = "".join(c for c in output_name if c.isalnum() or c in (" ", "_", "-")).strip().replace(" ", "-")
     if not safe_name:
@@ -487,6 +491,11 @@ def main():
 
     try:
         for r in range(max_rounds):
+            # Verificar si el usuario presionó 'q' para detener
+            if keyboard.is_pressed('q'):
+                print("\n🛑 Usuario detuvo el scraping con la tecla 'q'")
+                break
+                
             titles = get_visible_chat_titles(driver)
             print("DEBUG: titles visibles =", titles[:8], " total =", len(titles))
 
@@ -502,6 +511,11 @@ def main():
                     break
 
             for title in new_titles:
+                # Verificar si el usuario presionó 'q' para detener
+                if keyboard.is_pressed('q'):
+                    print("\n🛑 Usuario detuvo el scraping con la tecla 'q'")
+                    break
+                    
                 if non_group_count >= MAX_NON_GROUP_CHAT:
                     print(f"🛑 Límite alcanzado: {MAX_NON_GROUP_CHAT} chats (sin contar grupos).")
                     break
