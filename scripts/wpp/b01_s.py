@@ -16,7 +16,7 @@ from selenium.webdriver.common.keys import Keys
 
 #TIME_LIMIT_SECONDS = 5 * 60  # 5 minutos
 MAX_NON_GROUP_CHAT = 250  # Valor por defecto, se puede modificar en ejecución
-CHAT_TIME_LIMIT_SECONDS = 40  #  por chat
+CHAT_TIME_LIMIT_SECONDS = 60  #  por chat
 
 EXCLUDE_TITLES = {
     "Rosmery Papel Asesora de Viajes Terandes",
