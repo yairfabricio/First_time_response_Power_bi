@@ -2,7 +2,8 @@ import csv
 import time
 import os
 import re
-import keyboard  # Para detectar teclas
+import threading
+import sys
 from pathlib import Path
 from datetime import datetime, timedelta
 
@@ -14,6 +15,28 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
+
+# Variable global para detener el script
+stop_scraping = False
+
+def check_stop_key():
+    """Función para detectar Ctrl+Q en un hilo separado"""
+    global stop_scraping
+    try:
+        import keyboard
+        print("🛑 Para detener el scraping, presiona Ctrl+Q")
+        while True:
+            if keyboard.is_pressed('ctrl+q'):
+                print("\n🛑 Usuario detuvo el scraping con Ctrl+Q")
+                stop_scraping = True
+                break
+            time.sleep(0.1)
+    except ImportError:
+        print("⚠️ La librería 'keyboard' no está instalada. La detección de Ctrl+Q no está disponible.")
+        print("💡 Para activarla: pip install keyboard")
+    except Exception as e:
+        print(f"⚠️ Error al inicializar detección de teclas: {e}")
+        print("💡 Intenta ejecutar como administrador o instala: pip install keyboard")
 
 #TIME_LIMIT_SECONDS = 5 * 60  # 5 minutos
 MAX_NON_GROUP_CHAT = 250  # Valor por defecto, se puede modificar en ejecución
@@ -509,10 +532,14 @@ def main():
     print("\n🚀 Recorriendo chats: del más reciente al más antiguo...")
 
     try:
+        # Iniciar hilo para detectar Ctrl+Q
+        stop_thread = threading.Thread(target=check_stop_key, daemon=True)
+        stop_thread.start()
+        
         for r in range(max_rounds):
-            # Verificar si el usuario presionó 'q' para detener
-            if keyboard.is_pressed('q'):
-                print("\n🛑 Usuario detuvo el scraping con la tecla 'q'")
+            # Verificar si el usuario presionó Ctrl+Q para detener
+            if stop_scraping:
+                print("\n🛑 Deteniendo scraping por solicitud del usuario...")
                 break
                 
             titles = get_visible_chat_titles(driver)
@@ -530,9 +557,9 @@ def main():
                     break
 
             for title in new_titles:
-                # Verificar si el usuario presionó 'q' para detener
-                if keyboard.is_pressed('q'):
-                    print("\n🛑 Usuario detuvo el scraping con la tecla 'q'")
+                # Verificar si el usuario presionó Ctrl+Q para detener
+                if stop_scraping:
+                    print("\n🛑 Deteniendo scraping por solicitud del usuario...")
                     break
                     
                 if non_group_count >= MAX_NON_GROUP_CHAT:
