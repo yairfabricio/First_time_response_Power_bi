@@ -13,7 +13,9 @@ eta con la fecha actual.
     mapa_ejecutivos = {
         7: 'Eduardo',
         3: 'Karina',
-        4: 'Jennifer'
+        4: 'Jennifer',
+        12: 'Nicol',
+        13: 'Sheyla'
     }
     inboxes_a_procesar = list(mapa_ejecutivos.keys())
 
@@ -90,7 +92,26 @@ eta con la fecha actual.
 
     for conversation_id, grupo in conversaciones:
         grupo = grupo.sort_values(by='sent_at').reset_index(drop=True)
-        primer_mensaje = grupo.iloc[0]
+        
+        # Encontrar el primer mensaje real (no asignación automática)
+        primer_mensaje_real = None
+        for idx, mensaje in grupo.iterrows():
+            content = str(mensaje.get('content', ''))
+            sender_type = mensaje.get('sender_type')
+            
+            # Saltar asignaciones automáticas
+            if 'Asignado a' in content and 'por Automation System' in content:
+                continue
+            
+            # Este es el primer mensaje real
+            primer_mensaje_real = mensaje
+            break
+        
+        # Si no hay mensajes reales, continuar
+        if primer_mensaje_real is None:
+            continue
+            
+        primer_mensaje = primer_mensaje_real
 
         if str(primer_mensaje['contact_name']).strip().endswith('(GROUP)'):
             continue
@@ -101,7 +122,7 @@ eta con la fecha actual.
         if fecha_fin and fecha_primer_mensaje > pd.to_datetime(fecha_fin):
             continue
 
-        mensaje_entrante = 'si' if 'Asignado a' in str(primer_mensaje['content']) and 'por Automation System' in str(primer_mensaje['content']) else 'no'
+        mensaje_entrante = 'si' if primer_mensaje['sender_type'] == 'Contact' else 'no'
 
         primera_respuesta = grupo[(grupo['sender_type'] == 'User') & (grupo.index > 0)]
         mensaje_saliente = 'no'
