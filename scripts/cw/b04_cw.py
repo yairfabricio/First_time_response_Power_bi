@@ -144,9 +144,7 @@ def procesar_csv_y_transformar(carpeta_entrada, carpeta_base_salida, fecha_inici
         'Fecha_Hora',
         'Tipo_Mensaje',
         'Contenido_Mensaje',
-        'Secuencia',
-        'contact_name',
-        'contact_email'
+        'Secuencia'
     ]].copy()
 
     # Renombrar para que sea más claro
@@ -158,9 +156,7 @@ def procesar_csv_y_transformar(carpeta_entrada, carpeta_base_salida, fecha_inici
         'Fecha_Hora',
         'Tipo_Mensaje',
         'Contenido_Mensaje',
-        'Secuencia',
-        'Nombre_Contacto',
-        'Email_Contacto'
+        'Secuencia'
     ]
 
     # Ordenar por conversación y secuencia
@@ -213,7 +209,7 @@ def procesar_csv_y_transformar(carpeta_entrada, carpeta_base_salida, fecha_inici
     resumen.columns = ['ID_LEAD_CW', 'ID_LEAD', 'Ejecutivo', 'Total_Mensajes', 
                        'Primer_Mensaje', 'Ultimo_Mensaje', 'Mensajes_Cliente', 
                        'Mensajes_Vendedor', 'Duracion_Conversacion_Min', 
-                       'Ratio_Vendedor_Cliente', 'Nombre_Contacto', 'Email_Contacto']
+                       'Ratio_Vendedor_Cliente']
 
     # Guardar resumen
     output_resumen = os.path.join(carpeta_salida, 'resumen_conversaciones_powerbi.csv')
@@ -278,8 +274,7 @@ def procesar_csv_y_transformar(carpeta_entrada, carpeta_base_salida, fecha_inici
             'Fecha Saliente': fecha_saliente,
             'Hora Saliente': hora_saliente,
             'ID_LEAD_cw': conversation_id,
-            'contact_phone': primer_mensaje.get('contact_phone', ''),
-            'contact_name': primer_mensaje.get('contact_name', '')
+            'contact_phone': primer_mensaje.get('contact_phone', '')
         })
 
     if not resultados:
@@ -298,9 +293,9 @@ def procesar_csv_y_transformar(carpeta_entrada, carpeta_base_salida, fecha_inici
     print(f"\nProceso completado. Archivos guardados en: {carpeta_salida}")
 
 if __name__ == "__main__":
-    # Configuración de carpetas
-    carpeta_entrada = r"C:\Users\Lima - Rodrigo\Documents\ventas\files\input\cw"  # Cambia esto por tu carpeta de entrada
-    carpeta_base_salida = r"C:\Users\Lima - Rodrigo\Documents\ventas\files\output"   # Carpeta base de salida
+    # Configuración de carpetas (rutas relativas)
+    carpeta_entrada = r"..\files\input\cw"  # Ruta relativa desde scripts\cw\
+    carpeta_base_salida = r"..\files\output"   # Ruta relativa desde scripts\cw\
     
     # Filtro de fechas (opcional, poner None para no usar)
     fecha_inicio = None  # "2026-01-12"
