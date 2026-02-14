@@ -90,15 +90,7 @@ Antes de ejecutar cualquier script, activa tu entorno virtual:
 "C:\Users\Lima - Rodrigo\Documents\3pro\venv\Scripts\activate.bat"
 ```
 
-### 1. Procesar Datos de Chatwoot
-```bash
-cd scripts/cw
-python b04_cw.py
-```
-- Input: `files/input/cw/`
-- Output: `files/output/{YYYY-MM-DD}/`
-
-### 2. Extraer Datos de WhatsApp
+### 1. Extraer Datos de WhatsApp
 ```bash
 # Scraper básico (más chats, más tiempo)
 python scripts/wpp/b01_s.py
@@ -110,10 +102,17 @@ python scripts/wpp/b02_omar.py
 python scripts/wpp/b03_p.py
 ```
 
+### 2. Procesar Datos de Chatwoot
+```bash
+python scripts/cw/b04_cw.py
+```
+- Input: `files/input/cw/`
+- Output: `files/output/{YYYY-MM-DD}/`
+
 ### 3. Consolidar y Analizar
 ```bash
-cd processing
-python b05.py
+python processing/b05.py
+python processing/b06_pq.py
 ```
 - Input: Histórico + CSVs nuevos
 - Output: `files/input/nuevo_csv.csv`
