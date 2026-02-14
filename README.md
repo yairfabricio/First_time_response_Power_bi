@@ -85,6 +85,11 @@ pip install -r requirements.txt
 
 ## 🚀 Guía Rápida
 
+Antes de ejecutar cualquier script, activa tu entorno virtual:
+```bash
+"C:\Users\Lima - Rodrigo\Documents\3pro\venv\Scripts\activate.bat"
+```
+
 ### 1. Procesar Datos de Chatwoot
 ```bash
 cd scripts/cw
