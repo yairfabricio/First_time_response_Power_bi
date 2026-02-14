@@ -204,6 +204,17 @@ EJECUTIVOS_WPP = {
 }
 ```
 
+### Tabla de Ejecutivos
+
+| Ejecutivo        | Perfil | Tipo de fecha |
+|------------------|--------|---------------|
+| EstrellaCondori  | wpp4   | yyyy/mm/dd    |
+| Claribel         | wpp5   | yyyy/mm/dd    |
+| Eduardo          | 7      | yyyy/mm/dd    |
+| Jennifer         | 4      | yyyy/mm/dd    |
+| Nicol            | 12     | yyyy/mm/dd    |
+| Sheyla           | 13     | yyyy/mm/dd    |
+
 ## 📈 Métricas y Scoring
 
 ### Tiempo de Respuesta
