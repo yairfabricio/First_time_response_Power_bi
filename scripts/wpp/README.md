@@ -97,6 +97,21 @@ python b03_p.py
 python b03_p.py
 ```
 
+## 🏃 **Ejecución desde la carpeta raíz `ventas`**
+
+Si estás ubicado en la carpeta `ventas` (donde está este repositorio), ejecuta los scripts así:
+
+```bash
+# Scraper básico
+python scripts/wpp/b01_s.py
+
+# Scraper optimizado
+python scripts/wpp/b02_omar.py
+
+# Procesador (recorre todos los CSV de files/input/wpp)
+python scripts/wpp/b03_p.py
+```
+
 ---
 
 ## 📁 **Estructura de Carpetas**
