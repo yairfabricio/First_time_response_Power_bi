@@ -162,9 +162,10 @@ def procesar_csv_y_transformar(carpeta_entrada, carpeta_base_salida, fecha_inici
     # Ordenar por conversación y secuencia
     df_final = df_final.sort_values(['ID_LEAD_CW', 'Secuencia'])
 
-    # Guardar tabla detallada
-    output_path = os.path.join(carpeta_salida, 'mensajes_detallados_powerbi.csv')
-    df_final.to_csv(output_path, index=False, encoding='utf-8-sig')
+    # Guardar tabla detallada solo en Parquet (carpeta intermediate)
+    output_path_parquet = os.path.join(carpeta_salida, 'mensajes_detallados_powerbi.parquet')
+    df_final.to_parquet(output_path_parquet, index=False)
+    print(f"Guardado Parquet: {output_path_parquet}")
 
     # Crear también tabla resumen (agregada por conversación)
     resumen = df_clean.groupby(['conversation_id', 'ID_LEAD', 'Ejecutivo']).agg({
@@ -192,28 +193,29 @@ def procesar_csv_y_transformar(carpeta_entrada, carpeta_base_salida, fecha_inici
         resumen['Mensajes_Vendedor'] / resumen['Mensajes_Cliente'].replace(0, np.nan)
     ).round(2)
 
-    # Agregar nombre y email del contacto
-    contactos_info = df_clean.groupby('conversation_id').agg({
-        'contact_name': 'first',
-        'contact_email': 'first'
-    }).reset_index()
+    # No agregar nombre y email del contacto (se eliminaron de la tabla final)
+    # contactos_info = df_clean.groupby('conversation_id').agg({
+    #     'contact_name': 'first',
+    #     'contact_email': 'first'
+    # }).reset_index()
 
-    resumen = resumen.merge(
-        contactos_info,
-        left_on='ID_LEAD_CW',
-        right_on='conversation_id',
-        how='left'
-    )
+    # resumen = resumen.merge(
+    #     contactos_info,
+    #     left_on='ID_LEAD_CW',
+    #     right_on='conversation_id',
+    #     how='left'
+    # )
 
-    resumen = resumen.drop('conversation_id', axis=1)
+    # resumen = resumen.drop('conversation_id', axis=1)
     resumen.columns = ['ID_LEAD_CW', 'ID_LEAD', 'Ejecutivo', 'Total_Mensajes', 
                        'Primer_Mensaje', 'Ultimo_Mensaje', 'Mensajes_Cliente', 
                        'Mensajes_Vendedor', 'Duracion_Conversacion_Min', 
                        'Ratio_Vendedor_Cliente']
 
-    # Guardar resumen
-    output_resumen = os.path.join(carpeta_salida, 'resumen_conversaciones_powerbi.csv')
-    resumen.to_csv(output_resumen, index=False, encoding='utf-8-sig')
+    # Guardar resumen solo en Parquet (carpeta intermediate)
+    output_resumen_parquet = os.path.join(carpeta_salida, 'resumen_conversaciones_powerbi.parquet')
+    resumen.to_parquet(output_resumen_parquet, index=False)
+    print(f"Guardado Parquet resumen: {output_resumen_parquet}")
 
     # Mantener la lógica original para archivos individuales por ejecutivo
     conversaciones = df_clean.groupby('conversation_id')
@@ -266,7 +268,7 @@ def procesar_csv_y_transformar(carpeta_entrada, carpeta_base_salida, fecha_inici
 
         resultados.append({
             'Ejecutivo': primer_mensaje['Ejecutivo'],
-            'ID_LEAD': conversation_id,
+            'ID_LEAD': primer_mensaje.get('contact_phone', conversation_id),
             'Mensaje Entrante': mensaje_entrante,
             'Mensaje Saliente': mensaje_saliente,
             'Fecha Entrante': primer_mensaje['sent_at'].date(),
@@ -293,9 +295,9 @@ def procesar_csv_y_transformar(carpeta_entrada, carpeta_base_salida, fecha_inici
     print(f"\nProceso completado. Archivos guardados en: {carpeta_salida}")
 
 if __name__ == "__main__":
-    # Configuración de carpetas (rutas relativas)
-    carpeta_entrada = r"..\files\input\cw"  # Ruta relativa desde scripts\cw\
-    carpeta_base_salida = r"..\files\output"   # Ruta relativa desde scripts\cw\
+    # Configuración de carpetas (rutas relativas desde la raíz del proyecto)
+    carpeta_entrada = r"files\input\cw"  # Ruta relativa desde la raíz de ventas\
+    carpeta_base_salida = r"files\output"   # Ruta relativa desde la raíz de ventas\
     
     # Filtro de fechas (opcional, poner None para no usar)
     fecha_inicio = None  # "2026-01-12"
