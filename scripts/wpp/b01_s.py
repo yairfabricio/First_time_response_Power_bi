@@ -40,7 +40,7 @@ def check_stop_key():
 
 #TIME_LIMIT_SECONDS = 5 * 60  # 5 minutos
 MAX_NON_GROUP_CHAT = 250  # Valor por defecto, se puede modificar en ejecución
-CHAT_TIME_LIMIT_SECONDS = 60  #  por chat
+CHAT_TIME_LIMIT_SECONDS = 100  #  por chat
 
 EXCLUDE_TITLES = {
     "Rosmery Papel Asesora de Viajes Terandes",
@@ -512,8 +512,8 @@ def main():
     if not safe_name:
         safe_name = "todos_los_chats"
 
-    # ▸ Ruta relativa: ../files/input/wpp  (a partir de la carpeta 'scripts')
-    base_out_dir = (Path(__file__).resolve().parent.parent / "files" / "input" / "wpp")
+    # ▸ Ruta relativa: ../../files/input/wpp  (desde scripts/wpp/ hasta la raíz)
+    base_out_dir = (Path(__file__).resolve().parent.parent.parent / "files" / "input" / "wpp")
     base_out_dir.mkdir(parents=True, exist_ok=True)
     output_csv = str(base_out_dir / f"{safe_name}.csv")
 
