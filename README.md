@@ -95,28 +95,13 @@ python b04_cw.py
 
 ### 2. Extraer Datos de WhatsApp
 ```bash
-cd scripts/wpp
-
-# Opción A: Scraper básico (más chats, más tiempo)
-python b01_s.py
-
-# Opción B: Scraper optimizado (menos chats, más rápido, recupera datos con timeout)
-python b02_omar.py
-
-# Procesar datos extraídos
-python b03_p.py
-```
-
-Si prefieres ejecutar todo desde la raíz `ventas`, usa:
-
-```bash
-# Scraper básico
+# Scraper básico (más chats, más tiempo)
 python scripts/wpp/b01_s.py
 
-# Scraper optimizado
+# Scraper optimizado (menos chats, más rápido, recupera datos con timeout)
 python scripts/wpp/b02_omar.py
 
-# Procesador (recorre todos los CSV en files/input/wpp)
+# Procesar datos extraídos
 python scripts/wpp/b03_p.py
 ```
 

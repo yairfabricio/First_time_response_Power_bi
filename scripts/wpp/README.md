@@ -7,17 +7,17 @@ Esta carpeta contiene scripts para la extracción y procesamiento de datos de Wh
 ### 🤖 **b01_s.py** - Scraper Básico
 Script de extracción de mensajes con configuración estándar.
 
+**Uso:**
+```bash
+python b01_s.py
+```
+
 **Características:**
 - **Límite de chats**: 200 chats no-grupo
 - **Timeout por chat**: 40 segundos
 - **Manejo de timeouts**: Si hay timeout, **NO guarda** los mensajes recolectados
 - **Lista de excluidos**: Incluye contactos específicos y números de teléfono
 - **Debug**: Incluye logs de depuración
-
-**Uso:**
-```bash
-python b01_s.py
-```
 
 **Configuración:**
 - Perfil: wpp1..wpp6 (seleccionable al ejecutar)
@@ -29,6 +29,11 @@ python b01_s.py
 ### ⚡ **b02_omar.py** - Scraper Optimizado
 Versión mejorada con mejor manejo de errores y recuperación de datos.
 
+**Uso:**
+```bash
+python b02_omar.py
+```
+
 **Características:**
 - **Límite de chats**: 5 chats no-grupo (más conservador)
 - **Timeout por chat**: 20 segundos
@@ -37,20 +42,20 @@ Versión mejorada con mejor manejo de errores y recuperación de datos.
 - **Reporte de timeouts**: Muestra lista de chats que alcanzaron timeout
 
 **Mejoras sobre b01_s.py:**
-- ✅ Recupera datos incluso con timeouts
-- ✅ Menos tiempo de espera entre acciones
-- ✅ Mejor manejo de errores
-- ✅ Reporte detallado de chats con problemas
-
-**Uso:**
-```bash
-python b02_omar.py
-```
+- Recupera datos incluso con timeouts
+- Menos tiempo de espera entre acciones
+- Mejor manejo de errores
+- Reporte detallado de chats con problemas
 
 ---
 
-### 🔄 **b03_p.py** - Procesador de Datos
+### **b03_p.py** - Procesador de Datos
 Script que convierte los datos crudos del scraper en formato estructurado.
+
+**Uso:**
+```bash
+python b03_p.py
+```
 
 **Características:**
 - **Parseo inteligente de fechas**: Detecta automáticamente formato D/M vs M/D
@@ -68,11 +73,6 @@ Script que convierte los datos crudos del scraper en formato estructurado.
 - Tú, You, Me
 - Nombre del ejecutivo (del archivo)
 - Nombres completos de asesores
-
-**Uso:**
-```bash
-python b03_p.py
-```
 
 **Input/Output:**
 - Input: `files/input/wpp/{ejecutivo}.csv`
@@ -96,25 +96,6 @@ python b03_p.py
 # Procesar datos ya extraídos
 python b03_p.py
 ```
-
-## 🏃 **Ejecución desde la carpeta raíz `ventas`**
-
-Si estás ubicado en la carpeta `ventas` (donde está este repositorio), ejecuta los scripts así:
-
-```bash
-# Scraper básico
-python scripts/wpp/b01_s.py
-
-# Scraper optimizado
-python scripts/wpp/b02_omar.py
-
-# Procesador (recorre todos los CSV de files/input/wpp)
-python scripts/wpp/b03_p.py
-```
-
----
-
-## 📁 **Estructura de Carpetas**
 
 ```
 files/
