@@ -107,6 +107,19 @@ python b02_omar.py
 python b03_p.py
 ```
 
+Si prefieres ejecutar todo desde la raíz `ventas`, usa:
+
+```bash
+# Scraper básico
+python scripts/wpp/b01_s.py
+
+# Scraper optimizado
+python scripts/wpp/b02_omar.py
+
+# Procesador (recorre todos los CSV en files/input/wpp)
+python scripts/wpp/b03_p.py
+```
+
 ### 3. Consolidar y Analizar
 ```bash
 cd processing
