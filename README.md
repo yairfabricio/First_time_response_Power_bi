@@ -207,7 +207,7 @@ EJECUTIVOS_WPP = {
 
 | Ejecutivo        | Perfil | Tipo de fecha |
 |------------------|--------|---------------|
-| EstrellaCondori  | wpp4   | yyyy/mm/dd    |
+| EstrellaCondori  | wpp1   | yyyy/mm/dd    |
 | Claribel         | wpp5   | yyyy/mm/dd    |
 | Eduardo          | 7      | yyyy/mm/dd    |
 | Jennifer         | 4      | yyyy/mm/dd    |
